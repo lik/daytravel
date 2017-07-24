@@ -19,7 +19,7 @@ class BrowseHandler(webapps2.RequestHandler):
 
 class ResultsHandler(webapps2.RequestHandler):
 
-    
+
 
 
 
@@ -28,6 +28,6 @@ app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/planhandler', PlanHandler),
     ('/browsehandler', BrowseHandler),
-    ('/resultshandler', ResultsHandler)
+    ('/resultshandler', ResultsHandler),
 
 ], debug=True)
