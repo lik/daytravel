@@ -11,6 +11,23 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("templates/daytravel.html")
         self.response.write(template.render())
 
+class PlanHandler(webapps2.RequestHandler):
+
+
+class BrowseHandler(webapps2.RequestHandler):
+
+
+class ResultsHandler(webapps2.RequestHandler):
+
+    
+
+
+
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/planhandler', PlanHandler),
+    ('/browsehandler', BrowseHandler),
+    ('/resultshandler', ResultsHandler)
+
 ], debug=True)
