@@ -10,15 +10,15 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("templates/daytravel.html")
         self.response.write(template.render())
 
-class PlanHandler(webapps2.RequestHandler):
+class PlanHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(template.render())
 
-class BrowseHandler(webapps2.RequestHandler):
+class BrowseHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(template.render())
 
-class ResultsHandler(webapps2.RequestHandler):
+class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(template.render())
 
