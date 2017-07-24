@@ -11,13 +11,16 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render())
 
 class PlanHandler(webapps2.RequestHandler):
-
+    def get(self):
+        self.response.write(template.render())
 
 class BrowseHandler(webapps2.RequestHandler):
-
+    def get(self):
+        self.response.write(template.render())
 
 class ResultsHandler(webapps2.RequestHandler):
-
+    def get(self):
+        self.response.write(template.render())
 
 
 
