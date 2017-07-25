@@ -5,7 +5,7 @@
 }
 
 html {
-	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://u.sicp.me/fjcCG.jpg'); /* Temporary -- will try to implement Flickr API later down the line to change bg image to a Flickr search for the location */
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/0001.jpg'); /* Temporary -- will try to implement Flickr API later down the line to change bg image to a Flickr search for the location */
 	height: 100%;
 	background-repeat: no-repeat;
 	background-size: cover;
