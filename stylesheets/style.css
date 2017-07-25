@@ -3,14 +3,19 @@
 }
 
 html {
-	background: url('https://u.sicp.me/bvDHE.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://u.sicp.me/fjcCG.jpg'); /* Temporary -- will try to implement Flickr API later down the line to change bg image to a Flickr search for the location */
+	height: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
 	font-family: 'Work Sans', sans-serif;
 }
 
 #topbar {
-	background-color: white;
-	padding: 5px;
+	color: #FFFFFF;
+	background: rgba(61, 62, 61, 0.3);
+	padding: 10px;
 }
+
 
 form {
 	text-align: center;
