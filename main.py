@@ -53,6 +53,8 @@ class PlanHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template("templates/plan.html")
         self.response.write(template.render())
+    def post(self):
+        activity = self.request.get('subActivity')
 
 
 
