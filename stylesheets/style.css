@@ -1,7 +1,9 @@
 * {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
-
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 html {
@@ -37,8 +39,10 @@ select {
 	border: white;
 	border-width: 1px;
 	border-style: solid;
-	padding: 7px 16px; /* The 6px vertically centers text on FF, ignored by Webkit */
+	border-radius: 0px;
+	padding: 7px 16px;
 	display: inline-block;	
+	font-size: 14px;
 }
 
 button {
