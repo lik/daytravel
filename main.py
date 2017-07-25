@@ -20,9 +20,21 @@ class DayPlan(ndb.Model):
     results = ndb.KeyProperty(kind=Result, repeated=True)
     city = ndb.StringProperty()
 
+class Username(ndb.Model):
+    user = ndb.StringProperty()
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        Username_query = Username.query()
+        username=Username_query.fetch()
+        current_user = users.get_current_user()
+        logout_url= users.create_logout_url('/')
+        login_url= users.create_login_url('/')
+
         template = jinja_environment.get_template("templates/daytravel.html")
+        template_vars = {
+        
+        }
         self.response.write(template.render())
 
 
@@ -48,10 +60,6 @@ class BrowseHandler(webapp2.RequestHandler):
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write(template.render())
-
-
-
-
 
 
 
