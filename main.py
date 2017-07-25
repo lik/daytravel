@@ -11,6 +11,9 @@ jinja_environment = jinja2.Environment(
 class Username(ndb.Model):
     user = ndb.StringProperty()
 
+class City(ndb.Model):
+    city = ndb.StringProperty()
+
 class Activity(ndb.Model):
     name = ndb.StringProperty()
 
@@ -52,8 +55,14 @@ class MainHandler(webapp2.RequestHandler):
 
 class PlanHandler(webapp2.RequestHandler):
     def get(self):
+        City_Query =City.query()
+        city = City_Query.fetch()
+
         template = jinja_environment.get_template("templates/plan.html")
-        self.response.write(template.render())
+        template_vars = {
+        'city': city,
+        }
+        self.response.write(template.render(template_vars))
     def post(self):
         activity = self.request.get('subActivity')
 
