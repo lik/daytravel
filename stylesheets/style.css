@@ -10,7 +10,6 @@ html {
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-family: 'Open Sans', sans-serif;
-
 }
 
 #topbar {
@@ -19,17 +18,25 @@ html {
 	padding: 10px;
 }
 
+.page {
+	color: #FFFFFF;
+}
+
+hr {
+	background: #FFFFFF;
+	height: 1px;
+}
 
 form {
-	text-align: center;
-	margin-left: auto;
+	margin-left: 0;
 	margin-right: auto;
-	width: 100px;
 }
 
 button {
 	background-color: white;
-	border: none;
+	border: white;
+	border-width: 1px;
+	border-style: solid;
 	color: black;
 	padding: 7px 16px;
 	text-align: center;
@@ -44,4 +51,18 @@ button:hover {
 	border: white;
 	border-width: 1px;
 	border-style: solid;
+}
+
+@media only screen and (max-width: 960px) {
+	.page {
+		width: 75%;
+		margin: 0 auto;
+	}
+}
+
+@media only screen and (min-width: 961px) {
+	.page {
+		width: 960px;
+		margin: 0 auto;
+	}
 }

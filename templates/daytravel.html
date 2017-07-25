@@ -12,21 +12,28 @@
 	<br>
 	<br>
 	<body>
-		<form method="post" action="" >
-			<select>
-				<option name="city" value="San Francisco" selected>San Francisco, CA</option>
-				<option name="city" value="Mountain View">Mountain View, CA</option>
-				<option name="city" value="San Jose">San Jose, CA</option>
-				<option name="city" value="Oakland">Oakland, CA</option>
-				<option name="city" value="Sacramento">Sacramento, CA</option>
-			</select>
+		<div class="page">
+			<p class="title"><b>Select a city</b></p>
 			<br>
+			<hr>
 			<br>
-			<input id="pac-input" type="text"
-			 placeholder="Enter a location">
-			<br>
-			<button href="/planhandler">Submit</button>
-		</form>
+			<form method="post" action="" >
+				<select>
+					<option name="city" value="San Francisco" selected>San Francisco, CA</option>
+					<option name="city" value="Mountain View">Mountain View, CA</option>
+					<option name="city" value="San Jose">San Jose, CA</option>
+					<option name="city" value="Oakland">Oakland, CA</option>
+					<option name="city" value="Sacramento">Sacramento, CA</option>
+				</select>
+				<br>
+				<br>
+				<input id="pac-input" type="text"
+			  placeholder="Enter a location">
+				<br>
+				<br>
+				<button class="rightbutton" href="/planhandler">Submit</button>
+			</form>
+		</div>
 
 
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHhIL18jARC4cn2NmXw2V0HUN8whCzLLI&libraries=places"></script>
