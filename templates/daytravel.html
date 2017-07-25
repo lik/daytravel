@@ -47,12 +47,17 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 	    <button class="rightbutton" href="/plan">Next</button>
 			</form>
 			<br>
-			<a href= "{{logout_url}}">Log Out </a><br>
+			<br>
+			<a href= "{{logout_url}}">Log Out</a><br>
 		</div>
 
 		{% else %}
 		<div class="page">
-			<a href="{{login_url}}">Log In </a><br>
+			<div class="welcome">Welcome to Day in the City, the convenient webapp to help you plan your favorite activities at your destination!</div>
+			<br>
+			<hr>
+			<br>
+			<a href="{{login_url}}">Log In</a><br>
 		</div>
 
 		{% endif %}
