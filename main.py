@@ -71,6 +71,7 @@ class BrowseHandler(webapp2.RequestHandler):
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
+        template = jinja_environment.get_template("templates/results.html")
         self.response.write(template.render())
 
 
