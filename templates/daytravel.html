@@ -4,9 +4,9 @@
 	<link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script>
-    var images = ['0001.jpg', '0002.jpg', '0003.jpg', '0004.jpg', '0005.jpg', '0006.jpg', '0007.jpg', '0008.jpg', '0009.jpg', '0010.jpg', '0011.jpg', '0012.jpg'];
+var images = ['0001.jpg', '0002.jpg', '0003.jpg', '0004.jpg', '0005.jpg', '0006.jpg', '0007.jpg', '0008.jpg', '0009.jpg', '0010.jpg', '0011.jpg', '0012.jpg'];
 $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(images/' + images[Math.floor(Math.random() * images.length)] + ')'});
 		</script>
 		<div id="topbar">
@@ -17,47 +17,55 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 	<br>
 	<br>
 
-{% if current_user %}
-<a href= "{{logout_url}}">Log Out </a><br>
-
+	{% if current_user %}
 	<body>
 		<div class="page">
 			<div class="welcome">Hello {{current_user}}</div>
-				<p class="title"><b>Select a city</b></p>
-				<br>
-				<hr>
-				<br>
-				<form method="post" action="" >
-					<select>
-            <option name="city" value="Select a City" selected>Select a City</option>
-						<option name="city" value="San Francisco">San Francisco, CA</option>
-						<option name="city" value="Mountain View">Mountain View, CA</option>
-						<option name="city" value="San Jose">San Jose, CA</option>
-						<option name="city" value="Oakland">Oakland, CA</option>
-						<option name="city" value="Sacramento">Sacramento, CA</option>
-						<option name="city" value="Los Angeles">Los Angeles, CA</option>
-						<option name="city" value="San Diego">San Diego, CA</option>
-						<option name="city" value="Anaheim">Anaheim, CA</option>
-						<option name="city" value="San Mateo">San Mateo, CA</option>
-						<option name="city" value="Daly City">Daly City, CA</option>
-					</select>
-					<!-- <br>
-	     <br>
-	     <input id="pac-input" type="text" placeholder ="Enter a location"> -->
-	     <br>
-	     <br>
-	     <button class="rightbutton" href="/planhandler">Next</button>
-				</form>
-			</div>
+			<p class="title"><b>Select a city</b></p>
+			<br>
+			<hr>
+			<br>
+			<form method="post" action="" >
+				<select>
+					<option name="city" value="Select a City" selected>Select a City</option>
+					<option name="city" value="San Francisco">San Francisco, CA</option>
+					<option name="city" value="Mountain View">Mountain View, CA</option>
+					<option name="city" value="San Jose">San Jose, CA</option>
+					<option name="city" value="Oakland">Oakland, CA</option>
+					<option name="city" value="Sacramento">Sacramento, CA</option>
+					<option name="city" value="Los Angeles">Los Angeles, CA</option>
+					<option name="city" value="San Diego">San Diego, CA</option>
+					<option name="city" value="Anaheim">Anaheim, CA</option>
+					<option name="city" value="San Mateo">San Mateo, CA</option>
+					<option name="city" value="Daly City">Daly City, CA</option>
+				</select>
+				<!-- <br>
+	    <br>
+	    <input id="pac-input" type="text" placeholder ="Enter a location"> -->
+	    <br>
+	    <br>
+	    <button class="rightbutton" href="/planhandler">Next</button>
+			</form>
+			<br>
+			<a href= "{{logout_url}}">Log Out </a><br>
 
-{% else %}
-    <a href="{{login_url}}">Log In </a><br>
-{% endif %}
+		</div>
+
+		{% else %}
+		<div class="page">
+			<div class="welcome">Welcome to Day in the City, the webapp of choice for those wanting to explore cities!</div>
+			<br>
+			<hr>
+			<br>
+
+			<a href="{{ login_url }}">Log In</a>
+		</div>
+		{% endif %}
 
 
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHhIL18jARC4cn2NmXw2V0HUN8whCzLLI&libraries=places"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-			<script src="/javascript/daytravel.js" ></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHhIL18jARC4cn2NmXw2V0HUN8whCzLLI&libraries=places"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="/javascript/daytravel.js" ></script>
 
 	</body>
 
