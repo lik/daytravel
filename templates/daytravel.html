@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html>
-	<title>Day in the City</title>
-	<link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
-	<head>
-		<link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
-		<div id="navbar"<b>day</b> in the <b>city</b></div>	
-	</head>
-	<br>
-	<br>
-	<br>
-	<body>
-		<form method="post" action="" >
-			<select>
-				<option name="city" value="San Francisco" selected>San Francisco, CA</option>
-				<option name="city" value="Mountain View">Mountain View, CA</option>
-				<option name="city" value="San Jose">San Jose, CA</option>
-				<option name="city" value="Oakland">Oakland, CA</option>
-				<option name="city" value="Sacramento">Sacramento, CA</option>
-			</select>
-			<br>
-			<br>
-			<br>
-			<button href="/planhandler">Submit</button>
-		</form>
-	</body>
+  <title>DAY IN THE CITY</title>
+    <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
+  <head>DAY IN THE CITY</head>
+<br>
+<br>
+<br>
+    <body>
+      <form method="post" action="" >
+        <select>
+          <option name="city" value="San Francisco" selected>San Francisco, CA</option>
+          <option name="city" value="Mountain View">Mountain View, CA</option>
+          <option name="city" value="San Jose">San Jose, CA</option>
+          <option name="city" value="Oakland">Oakland, CA</option>
+          <option name="city" value="Sacramento">Sacramento, CA</option>
+        </select>
+        <br>
+        <br>
+        <input id="pac-input" type="text"
+        placeholder="Enter a location">
+        <br>
+        <button href="/planhandler">Submit</button>
+      </form>
+
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHhIL18jARC4cn2NmXw2V0HUN8whCzLLI&libraries=places"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="/javascript/daytravel.js" ></script>
+  
+  </body>
+
 </html>
