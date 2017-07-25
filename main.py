@@ -20,6 +20,7 @@ class Result(ndb.Model):
 
 class DayPlan(ndb.Model):
     user = ndb.StringProperty()
+    # repeated property makes 'results' into a list
     results = ndb.KeyProperty(kind=Result, repeated=True)
     city = ndb.StringProperty()
 
