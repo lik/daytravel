@@ -50,16 +50,10 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 			<a href= "{{logout_url}}">Log Out </a><br>
 		</div>
 
-		{% else %}
-		<div class="page">
-			<div class="welcome">Welcome to Day in the City, the webapp of choice for those wanting to explore cities!</div>
-			<br>
-			<hr>
-			<br>
+  {% else %}
+    <a href="{login_url}">Log In </a><br>
 
-			<a href="{{ login_url }}">Log In</a>
-		</div>
-		{% endif %}
+  {% endif %}
 
 
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHhIL18jARC4cn2NmXw2V0HUN8whCzLLI&libraries=places"></script>
