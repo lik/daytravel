@@ -8,6 +8,9 @@ from google.appengine.ext import ndb
 jinja_environment = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
+class Username(ndb.Model):
+    user = ndb.StringProperty()
+
 class Activity(ndb.Model):
     name = ndb.StringProperty()
 
@@ -20,22 +23,28 @@ class DayPlan(ndb.Model):
     results = ndb.KeyProperty(kind=Result, repeated=True)
     city = ndb.StringProperty()
 
-class Username(ndb.Model):
-    user = ndb.StringProperty()
+
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        Username_query = Username.query()
-        username=Username_query.fetch()
         current_user = users.get_current_user()
         logout_url= users.create_logout_url('/')
         login_url= users.create_login_url('/')
 
         template = jinja_environment.get_template("templates/daytravel.html")
         template_vars = {
-
+        'current_user': current_user,
+        'logout_url': logout_url,
+        'login_url': login_url,
         }
-        self.response.write(template.render())
+        self.response.write(template.render(template_vars))
+
+    def post(self):
+        current_user = users.get_current_user()
+        logout_url= users.create_logout_url('/')
+        login_url= users.create_login_url('/')
+
+        self.redirect('/')
 
 
 

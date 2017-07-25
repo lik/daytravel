@@ -16,6 +16,10 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 	<br>
 	<br>
 	<br>
+
+{% if current_user %}
+<a href= "{{logout_url}}">Log Out </a><br>
+
 	<body>
 		<div class="page">
 			<div class="welcome">Hello {{current_user}}</div>
@@ -45,6 +49,10 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 	     <button class="rightbutton" href="/planhandler">Next</button>
 				</form>
 			</div>
+
+{% else %}
+    <a href="{{login_url}}">Log In </a><br>
+{% endif %}
 
 
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHhIL18jARC4cn2NmXw2V0HUN8whCzLLI&libraries=places"></script>
