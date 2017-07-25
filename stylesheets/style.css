@@ -1,9 +1,6 @@
 * {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
 }
 
 html {
@@ -11,6 +8,7 @@ html {
 	background-repeat: no-repeat;
 	background-size: cover;
 	font-family: 'Open Sans', sans-serif;
+	color: #FFFFFF;
 }
 
 #topbar {
@@ -33,7 +31,6 @@ a {
 	padding: 7px 16px;
 	font-size: 14px;
 	background: #e09192;
-
 }
 
 a:link, a:visited {
@@ -49,6 +46,13 @@ form {
 	margin-right: auto;
 }
 
+input {
+	color: white;
+	border: white;
+	border-style: solid;
+}
+
+
 select {
 	background-color: #fff;
 	border: white;
@@ -58,6 +62,10 @@ select {
 	padding: 7px 16px;
 	display: inline-block;
 	font-size: 14px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+
 }
 
 button {
@@ -79,6 +87,14 @@ button:hover {
 	border: white;
 	border-width: 1px;
 	border-style: solid;
+}
+
+.rightbutton, #login {
+	background-color: #16A085;
+	border: #16A085;
+	border-width: 1px;
+	border-style: solid;
+	color: white;
 }
 
 @media only screen and (max-width: 960px) {

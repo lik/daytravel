@@ -16,7 +16,12 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 	<br>
 	<br>
 	<br>
-  <br>
+	<br>
+
+	{% block content %}
+
+
+
 	{% if current_user %}
 	<body>
 		<div class="page">
@@ -57,10 +62,13 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 			<br>
 			<hr>
 			<br>
-			<a href="{{login_url}}">Log In</a><br>
+			<a id="login" href="{{login_url}}">Log In</a><br>
 		</div>
 
 		{% endif %}
+		
+
+		{% endblock %}
 
 
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHhIL18jARC4cn2NmXw2V0HUN8whCzLLI&libraries=places"></script>
