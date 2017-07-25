@@ -32,6 +32,15 @@ form {
 	margin-right: auto;
 }
 
+select {
+	background-color: #fff;
+	border: white;
+	border-width: 1px;
+	border-style: solid;
+	padding: 7px 16px; /* The 6px vertically centers text on FF, ignored by Webkit */
+	display: inline-block;	
+}
+
 button {
 	background-color: white;
 	border: white;
