@@ -1,3 +1,27 @@
+'''
+Please refer to http://www.yelp.com/developers/v3/documentation for the API
+documentation.
+
+This program requires the Python requests library, which you can install via:
+`pip install -r requirements.txt`.
+
+Sample usage of the program:
+`python sample.py --term="bars" --location="San Francisco, CA"`
+
+'''
+from __future__ import print_function
+
+import argparse
+import json
+import pprint
+import requests
+import sys
+import urllib
+
+from urllib2 import HTTPError
+from urllib import quote
+from urllib import urlencode
+
 import webapp2
 import os
 import jinja2
