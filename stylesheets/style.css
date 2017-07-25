@@ -1,12 +1,13 @@
 * {
 	margin: 0;
 }
+
 html {
-	background: url('https://u.sicp.me/drsKH.jpg'); *temporary*
+	background: url('https://u.sicp.me/bvDHE.jpg');
 	font-family: 'Work Sans', sans-serif;
 }
 
-#navbar {
+#topbar {
 	background-color: white;
 	padding: 5px;
 }
