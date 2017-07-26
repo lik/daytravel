@@ -237,7 +237,9 @@ class PlanHandler(webapp2.RequestHandler):
         city= self.request.get('city')
         activity = self.request.get('activity')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
+        #this is where we pass in form input
         response = search(bearer_token, "hiking", "Los Altos, CA")
+        # self.redirect('/results?city=' + city + '&activity=' activity)
 
 
 class ResultsHandler(webapp2.RequestHandler):
@@ -247,8 +249,8 @@ class ResultsHandler(webapp2.RequestHandler):
         template_vars = {
         'activity': activity,
         }
-        self.response.write(template.render())
-        query_api('hiking', 'Mountain View, CA')
+        self.response.write(template.render(template_vars))
+        self.response.write('Hello World!')
     def post(self):
         activity = self.request.get('activity')
 
