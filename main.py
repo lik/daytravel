@@ -191,24 +191,13 @@ def main_fusion():
 
 
 
-class Username(ndb.Model):
-    user = ndb.StringProperty()
 
 
-
-
+class Profile(ndb.Model):
+    name = ndb.StringProperty()
 
 
 class City(ndb.Model):
-    city = ndb.StringProperty()
-
-
-
-
-
-
-
-class Activity(ndb.Model):
     name = ndb.StringProperty()
 
 
@@ -216,9 +205,21 @@ class Activity(ndb.Model):
 
 
 
-class Result(ndb.Model):
-    activity_key = ndb.KeyProperty(kind=Activity)
+
+class ActivityType(ndb.Model):
+    name = ndb.StringProperty()
+
+
+
+
+class Results(ndb.Model):
+    activitytype_key = ndb.KeyProperty(kind=ActivityType)
     suggestion = ndb.StringProperty()
+    city_key = ndb.KeyProperty(kind=City)
+    profile_key = ndb.KeyProperty(kind=Profile)
+
+
+
 
 
 
@@ -229,7 +230,7 @@ class Result(ndb.Model):
 class DayPlan(ndb.Model):
     user = ndb.StringProperty()
     # repeated property makes 'results' into a list
-    results = ndb.KeyProperty(kind=Result, repeated=True)
+    results = ndb.KeyProperty(kind=Results, repeated=True)
     city = ndb.StringProperty()
 
 
