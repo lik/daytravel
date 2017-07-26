@@ -65,7 +65,6 @@ def obtain_bearer_token(host, path):
         'grant_type': GRANT_TYPE,
     })
     print('@@@@@@@@@' + CLIENT_ID)
-    print('@@@@@@@@@' + CLIENT_ID)
     headers = {
         'content-type': 'application/x-www-form-urlencoded',
     }
@@ -104,8 +103,7 @@ def request(host, path, bearer_token, url_params=None):
         'Authorization': 'Bearer %s' % bearer_token,
     }
 
-    print(u'Querying {0} ...'.format(url))
-
+    logging.info(u'Querying {0} ...'.format(url))
     result = urlfetch.fetch(
         url=url,
         params = urllib.urlencode({
@@ -115,7 +113,7 @@ def request(host, path, bearer_token, url_params=None):
         }),
         method=urlfetch.GET,
         headers=headers)
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
+    logging.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
     return json.loads(result.content)
     #response = requests.request('GET', url, headers=headers, params=url_params)
     #return response.json()
@@ -150,8 +148,8 @@ def get_business(bearer_token, business_id):
         dict: The JSON response from the request.
     """
     business_path = BUSINESS_PATH + business_id
-
     return request(API_HOST, business_path, bearer_token)
+
 
 # important
 def query_api(term, location):
@@ -183,51 +181,17 @@ def query_api(term, location):
     pprint.pprint(response, indent=2)
 '''
 
-def main_fusion():
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('-q', '--term', dest='term', default=DEFAULT_TERM,
-                        type=str, help='Search term (default: %(default)s)')
-    parser.add_argument('-l', '--location', dest='location',
-                        default=DEFAULT_LOCATION, type=str,
-                        help='Search location (default: %(default)s)')
-
-    input_values = parser.parse_args()
-
-    try:
-        query_api(input_values.term, input_values.location)
-    except HTTPError as error:
-        sys.exit(
-            'Encountered HTTP error {0} on {1}:\n {2}\nAbort program.'.format(
-                error.code,
-                error.url,
-                error.read(),
-            )
-        )
 
 
 
+class Profile(ndb.Model):
+    name = ndb.StringProperty()
 
-
-
-class Username(ndb.Model):
-    user = ndb.StringProperty()
-
-
-
-
+profile = Profile(name="Adina Wallis")
+key = profile.put()
 
 
 class City(ndb.Model):
-    city = ndb.StringProperty()
-
-
-
-
-
-
-
-class Activity(ndb.Model):
     name = ndb.StringProperty()
 
 
@@ -235,9 +199,21 @@ class Activity(ndb.Model):
 
 
 
-class Result(ndb.Model):
-    activity_key = ndb.KeyProperty(kind=Activity)
+
+class ActivityType(ndb.Model):
+    name = ndb.StringProperty()
+
+
+
+
+class Results(ndb.Model):
+    activitytype_key = ndb.KeyProperty(kind=ActivityType)
     suggestion = ndb.StringProperty()
+    city_key = ndb.KeyProperty(kind=City)
+    profile_key = ndb.KeyProperty(kind=Profile)
+
+
+
 
 
 
@@ -248,7 +224,7 @@ class Result(ndb.Model):
 class DayPlan(ndb.Model):
     user = ndb.StringProperty()
     # repeated property makes 'results' into a list
-    results = ndb.KeyProperty(kind=Result, repeated=True)
+    results = ndb.KeyProperty(kind=Results, repeated=True)
     city = ndb.StringProperty()
 
 
@@ -291,6 +267,10 @@ class PlanHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
     def post(self):
         activity = self.request.get('subActivity')
+        bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
+        response = search(bearer_token, term, location)
+
+
 
 class BrowseHandler(webapp2.RequestHandler):
     def get(self):
