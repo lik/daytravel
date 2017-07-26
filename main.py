@@ -15,6 +15,7 @@ import webapp2
 import os
 import jinja2
 
+from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -58,18 +59,26 @@ def obtain_bearer_token(host, path):
         HTTPError: An error occurs from the HTTP request.
     """
     url = '{0}{1}'.format(host, quote(path.encode('utf8')))
-    assert CLIENT_ID, "Please supply your client_id."
-    assert CLIENT_SECRET, "Please supply your client_secret."
     data = urlencode({
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET,
         'grant_type': GRANT_TYPE,
     })
+    print('@@@@@@@@@' + CLIENT_ID)
+    print('@@@@@@@@@' + CLIENT_ID)
     headers = {
         'content-type': 'application/x-www-form-urlencoded',
     }
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + url)
-    response = requests.request('POST', url, data=data, headers=headers)
+    result = urlfetch.fetch(
+        url=url,
+        payload=data,
+        method=urlfetch.POST,
+        headers=headers)
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
+    return "BIO6_LpbIcFkeKDB9SsSAONt3lE2IwrdiTxUeq-Ag1MKOzSc4m-8QyPjdV6WmI27ySuLEKv7czHoJmJjFHrCyjfgxucTvKPpJG9JCsg_08KCz4J-WrEfeaiACoJ2WXYx"
+    #bearer_token = json.decode(result.content)['access_token']
+    #return bearer_token
+    #response = requests.request('POST', url, data=data, headers=headers)
     #bearer_token = response.json()['access_token']
     #return bearer_token
 
@@ -97,9 +106,19 @@ def request(host, path, bearer_token, url_params=None):
 
     print(u'Querying {0} ...'.format(url))
 
-    response = requests.request('GET', url, headers=headers, params=url_params)
+    result = urlfetch.fetch(
+        url=url,
+        params = urllib.urlencode({
 
-    return response.json()
+
+
+        }),
+        method=urlfetch.GET,
+        headers=headers)
+    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
+    return json.loads(result.content)
+    #response = requests.request('GET', url, headers=headers, params=url_params)
+    #return response.json()
 
 
 def search(bearer_token, term, location):
