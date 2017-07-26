@@ -267,6 +267,7 @@ class PlanHandler(webapp2.RequestHandler):
         }
         self.response.write(template.render(template_vars))
     def post(self):
+        city= self.request.get('city')
         activity = self.request.get('subActivity')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         response = search(bearer_token, term, location)
