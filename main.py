@@ -63,7 +63,6 @@ def obtain_bearer_token(host, path):
         'grant_type': GRANT_TYPE,
     })
     print('@@@@@@@@@' + CLIENT_ID)
-    print('@@@@@@@@@' + CLIENT_ID)
     headers = {
         'content-type': 'application/x-www-form-urlencoded',
     }
@@ -102,8 +101,7 @@ def request(host, path, bearer_token, url_params=None):
         'Authorization': 'Bearer %s' % bearer_token,
     }
 
-    print(u'Querying {0} ...'.format(url))
-
+    logging.info(u'Querying {0} ...'.format(url))
     result = urlfetch.fetch(
         url=url,
         params = urllib.urlencode({
@@ -115,7 +113,7 @@ def request(host, path, bearer_token, url_params=None):
         }),
         method=urlfetch.GET,
         headers=headers)
-    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
+    logging.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
     return json.loads(result.content)
     #response = requests.request('GET', url, headers=headers, params=url_params)
     #return response.json()
@@ -150,65 +148,7 @@ def get_business(bearer_token, business_id):
         dict: The JSON response from the request.
     """
     business_path = BUSINESS_PATH + business_id
-
     return request(API_HOST, business_path, bearer_token)
-
-# important
-def query_api(term, location):
-    """Queries the API by the input values from the user.
-
-    Args:
-        term (str): The search term to query.
-        location (str): The location of the business to query.
-    """
-    bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
-
-    response = search(bearer_token, term, location)
-
-'''
-    businesses = response.get('businesses')
-
-    if not businesses:
-        print(u'No businesses for {0} in {1} found.'.format(term, location))
-        return
-
-    business_id = businesses[0]['id']
-
-    print(u'{0} businesses found, querying business info ' \
-        'for the top result "{1}" ...'.format(
-            len(businesses), business_id))
-    response = get_business(bearer_token, business_id)
-
-    print(u'Result for business "{0}" found:'.format(business_id))
-    pprint.pprint(response, indent=2)
-'''
-
-def main_fusion():
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('-q', '--term', dest='term', default=DEFAULT_TERM,
-                        type=str, help='Search term (default: %(default)s)')
-    parser.add_argument('-l', '--location', dest='location',
-                        default=DEFAULT_LOCATION, type=str,
-                        help='Search location (default: %(default)s)')
-
-    input_values = parser.parse_args()
-
-    try:
-        query_api(input_values.term, input_values.location)
-    except HTTPError as error:
-        sys.exit(
-            'Encountered HTTP error {0} on {1}:\n {2}\nAbort program.'.format(
-                error.code,
-                error.url,
-                error.read(),
-            )
-        )
-
-
-
-
-
 
 class Username(ndb.Model):
     user = ndb.StringProperty()
@@ -302,6 +242,10 @@ class PlanHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
     def post(self):
         activity = self.request.get('subActivity')
+        bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
+        response = search(bearer_token, term, location)
+
+
 
 
 
