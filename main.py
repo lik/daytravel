@@ -76,11 +76,6 @@ def obtain_bearer_token(host, path):
         headers=headers)
     print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
     return "BIO6_LpbIcFkeKDB9SsSAONt3lE2IwrdiTxUeq-Ag1MKOzSc4m-8QyPjdV6WmI27ySuLEKv7czHoJmJjFHrCyjfgxucTvKPpJG9JCsg_08KCz4J-WrEfeaiACoJ2WXYx"
-    #bearer_token = json.decode(result.content)['access_token']
-    #return bearer_token
-    #response = requests.request('POST', url, data=data, headers=headers)
-    #bearer_token = response.json()['access_token']
-    #return bearer_token
 
 
 def request(host, path, bearer_token, params):
@@ -113,8 +108,6 @@ def request(host, path, bearer_token, params):
         headers=headers)
     logging.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
     return json.loads(result.content)
-    #response = requests.request('GET', url, headers=headers, params=params)
-    #return response.json()
 
 
 def search(bearer_token, term, location):
@@ -180,8 +173,6 @@ def query_api(term, location):
 '''
 
 
-
-
 class Profile(ndb.Model):
     name = ndb.StringProperty()
 
@@ -193,15 +184,8 @@ class City(ndb.Model):
     name = ndb.StringProperty()
 
 
-
-
-
-
-
 class ActivityType(ndb.Model):
     name = ndb.StringProperty()
-
-
 
 
 class Results(ndb.Model):
@@ -211,27 +195,11 @@ class Results(ndb.Model):
     profile_key = ndb.KeyProperty(kind=Profile)
 
 
-
-
-
-
-
-
-
-
 class DayPlan(ndb.Model):
     user = ndb.StringProperty()
     # repeated property makes 'results' into a list
     results = ndb.KeyProperty(kind=Results, repeated=True)
     city = ndb.StringProperty()
-
-
-
-
-
-
-
-
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -256,6 +224,7 @@ class MainHandler(webapp2.RequestHandler):
 
         self.redirect('/plan?city=' + city)
 
+
 class PlanHandler(webapp2.RequestHandler):
     def get(self):
         city= self.request.get('city')
@@ -270,10 +239,6 @@ class PlanHandler(webapp2.RequestHandler):
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         response = search(bearer_token, "hiking", "Los Altos, CA")
 
-class BrowseHandler(webapp2.RequestHandler):
-    def get(self):
-        template = jinja_environment.get_template("templates/browse.html")
-        self.response.write(template.render())
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
@@ -288,9 +253,10 @@ class ResultsHandler(webapp2.RequestHandler):
         activity = self.request.get('activity')
 
 
-
-
-
+class BrowseHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template("templates/browse.html")
+        self.response.write(template.render())
 
 
 app = webapp2.WSGIApplication([
