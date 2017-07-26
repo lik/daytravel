@@ -251,11 +251,12 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
 
     def post(self):
+        city= self.request.get('city')
         current_user = users.get_current_user()
         logout_url= users.create_logout_url('/')
         login_url= users.create_login_url('/')
 
-        self.redirect('/plan?city={{city}}')
+        self.redirect('/plan?city=' + city)
 
 class PlanHandler(webapp2.RequestHandler):
     def get(self):
