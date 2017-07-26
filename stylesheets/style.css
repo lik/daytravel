@@ -109,6 +109,9 @@ button:hover {
 	border-style: solid;
 }
 
+input {
+	margin-right: 5px;
+}
 
 @media only screen and (max-width: 960px) {
 	.page {
