@@ -150,24 +150,48 @@ def get_business(bearer_token, business_id):
     business_path = BUSINESS_PATH + business_id
     return request(API_HOST, business_path, bearer_token)
 
-class Username(ndb.Model):
-    user = ndb.StringProperty()
+
+# important
+def query_api(term, location):
+    """Queries the API by the input values from the user.
+
+    Args:
+        term (str): The search term to query.
+        location (str): The location of the business to query.
+    """
+    bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
+
+    response = search(bearer_token, term, location)
+
+'''
+    businesses = response.get('businesses')
+
+    if not businesses:
+        print(u'No businesses for {0} in {1} found.'.format(term, location))
+        return
+
+    business_id = businesses[0]['id']
+
+    print(u'{0} businesses found, querying business info ' \
+        'for the top result "{1}" ...'.format(
+            len(businesses), business_id))
+    response = get_business(bearer_token, business_id)
+
+    print(u'Result for business "{0}" found:'.format(business_id))
+    pprint.pprint(response, indent=2)
+'''
 
 
 
 
+class Profile(ndb.Model):
+    name = ndb.StringProperty()
+
+profile = Profile(name="Adina Wallis")
+key = profile.put()
 
 
 class City(ndb.Model):
-    city = ndb.StringProperty()
-
-
-
-
-
-
-
-class Activity(ndb.Model):
     name = ndb.StringProperty()
 
 
@@ -175,9 +199,21 @@ class Activity(ndb.Model):
 
 
 
-class Result(ndb.Model):
-    activity_key = ndb.KeyProperty(kind=Activity)
+
+class ActivityType(ndb.Model):
+    name = ndb.StringProperty()
+
+
+
+
+class Results(ndb.Model):
+    activitytype_key = ndb.KeyProperty(kind=ActivityType)
     suggestion = ndb.StringProperty()
+    city_key = ndb.KeyProperty(kind=City)
+    profile_key = ndb.KeyProperty(kind=Profile)
+
+
+
 
 
 
@@ -188,7 +224,7 @@ class Result(ndb.Model):
 class DayPlan(ndb.Model):
     user = ndb.StringProperty()
     # repeated property makes 'results' into a list
-    results = ndb.KeyProperty(kind=Result, repeated=True)
+    results = ndb.KeyProperty(kind=Results, repeated=True)
     city = ndb.StringProperty()
 
 
