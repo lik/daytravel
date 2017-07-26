@@ -6,13 +6,15 @@ import pprint
 import requests
 import sys
 import urllib
-import webapp2
-import os
-import jinja2
 
 from urllib2 import HTTPError
 from urllib import quote
 from urllib import urlencode
+
+import webapp2
+import os
+import jinja2
+
 from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -107,11 +109,9 @@ def request(host, path, bearer_token, url_params=None):
     result = urlfetch.fetch(
         url=url,
         params = urllib.urlencode({
-        '''
-            'term': term,
-            'location': location,
-            'limit': limit
-            '''
+
+
+
         }),
         method=urlfetch.GET,
         headers=headers)
@@ -279,18 +279,7 @@ class MainHandler(webapp2.RequestHandler):
         logout_url= users.create_logout_url('/')
         login_url= users.create_login_url('/')
 
-        self.redirect('/plan')
-
-
-
-
-
-
-
-
-
-
-
+        self.redirect('/plan?city={{city}}')
 
 class PlanHandler(webapp2.RequestHandler):
     def get(self):
@@ -302,16 +291,6 @@ class PlanHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
     def post(self):
         activity = self.request.get('subActivity')
-
-
-
-
-
-
-
-
-
-
 
 class BrowseHandler(webapp2.RequestHandler):
     def get(self):
