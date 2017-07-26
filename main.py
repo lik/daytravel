@@ -246,15 +246,15 @@ class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         city= self.request.get('city')
         activities = self.request.get_all('activity')
-
+        activities_str = ','.join(activities)
         activities_dict = dict((k.strip(), v.strip()) for k,v in
-              (item.split('.') for item in activities.split(',')))
+              (item.split('.') for item in activities_str.split(',')))
         print(activities_dict)
 
         template = jinja_environment.get_template("templates/results.html")
         template_vars = {
             'city': city,
-            'activity': activity,
+            'activities': activities,
         }
         self.response.write(template.render(template_vars))
     def post(self):
