@@ -267,32 +267,26 @@ class PlanHandler(webapp2.RequestHandler):
         }
         self.response.write(template.render(template_vars))
     def post(self):
-        activity = self.request.get('subActivity')
+        activity = self.request.get('activity')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         response = search(bearer_token, term, location)
-
-
 
 class BrowseHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template("templates/browse.html")
         self.response.write(template.render())
 
-
-
-
-
-
-
-
-
-
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
+        activity = self.request.get('activity')
         template = jinja_environment.get_template("templates/results.html")
+        template_vars = {
+        'activity': activity,
+        }
         self.response.write(template.render())
         query_api('hiking', 'Mountain View, CA')
-
+    def post(self):
+        activity = self.request.get('activity')
 
 
 
