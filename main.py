@@ -6,17 +6,15 @@ import pprint
 import requests
 import sys
 import urllib
-import webapp2
-import os
-import jinja2
-import requests
-import requests_toolbelt.adapters.appengine
-
-requests_toolbelt.adapters.appengine.monkeypatch()
 
 from urllib2 import HTTPError
 from urllib import quote
 from urllib import urlencode
+
+import webapp2
+import os
+import jinja2
+
 from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -109,11 +107,9 @@ def request(host, path, bearer_token, url_params=None):
     result = urlfetch.fetch(
         url=url,
         params = urllib.urlencode({
-        '''
-            'term': term,
-            'location': location,
-            'limit': limit
-            '''
+
+
+
         }),
         method=urlfetch.GET,
         headers=headers)
@@ -255,22 +251,12 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
 
     def post(self):
+        city= self.request.get('city')
         current_user = users.get_current_user()
         logout_url= users.create_logout_url('/')
         login_url= users.create_login_url('/')
 
-        self.redirect('/plan')
-
-
-
-
-
-
-
-
-
-
-
+        self.redirect('/plan?city=' + city)
 
 class PlanHandler(webapp2.RequestHandler):
     def get(self):
@@ -284,16 +270,6 @@ class PlanHandler(webapp2.RequestHandler):
         activity = self.request.get('subActivity')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         response = search(bearer_token, term, location)
-
-
-
-
-
-
-
-
-
-
 
 
 
