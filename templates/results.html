@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <title>DAY IN THE CITY</title>
-    <link type="text/css" rel="stylesheet" href="stylesheets/style.css"/>
-  <head>DAY IN THE CITY</head>
-<br>
-<br>
-<br>
-    <body>
+{% extends "templates/daytravel.html" %}
+{% block content %}
+
+<body>
+	<div class="page">
       <h1>Your Day in the City</h1>
       Outdoor Activities:
       Food:
@@ -14,5 +10,8 @@
       Shopping:
       Sightseeing:
       Family Activities:
+	</div>
     </body>
+
+    {% endblock %}
 </html>
