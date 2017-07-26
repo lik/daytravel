@@ -9,6 +9,10 @@ import urllib
 import webapp2
 import os
 import jinja2
+import requests
+import requests_toolbelt.adapters.appengine
+
+requests_toolbelt.adapters.appengine.monkeypatch()
 
 from urllib2 import HTTPError
 from urllib import quote
