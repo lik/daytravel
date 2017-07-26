@@ -238,14 +238,19 @@ class PlanHandler(webapp2.RequestHandler):
         activities = self.request.get_all('activity')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         #this is where we pass in form input
-        response = search(bearer_token, activity, city)
+        response = search(bearer_token, activities[0], city)
         self.redirect('/results?city=' + city + '&activity=' + ','.join(activities))
 
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         city= self.request.get('city')
-        activity = self.request.get_all('activity')
+        activities = self.request.get_all('activity')
+
+        activities_dict = dict((k.strip(), v.strip()) for k,v in
+              (item.split('.') for item in activities.split(',')))
+        print(activities_dict)
+
         template = jinja_environment.get_template("templates/results.html")
         template_vars = {
             'city': city,
