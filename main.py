@@ -227,15 +227,19 @@ class MainHandler(webapp2.RequestHandler):
 
 class PlanHandler(webapp2.RequestHandler):
     def get(self):
-        city= self.request.get('city')
+        city = self.request.get('city')
+        logout_url = users.create_logout_url('/')
+
         template = jinja_environment.get_template("templates/plan.html")
         template_vars = {
             'city': city,
+            'logout_url': logout_url,
         }
         self.response.write(template.render(template_vars))
     def post(self):
         city = self.request.get('city')
         activities = self.request.get_all('activity')
+        logout_url = users.create_logout_url('/')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         #this is where we pass in form input
         response = search(bearer_token, activities[0], city)
@@ -246,6 +250,7 @@ class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         city= self.request.get('city')
         activities = self.request.get_all('activity')
+        logout_url = users.create_logout_url('/')
         activities_str = ','.join(activities)
         activities_dict = dict((k.strip(), v.strip()) for k,v in
               (item.split('.') for item in activities_str.split(',')))
@@ -255,11 +260,13 @@ class ResultsHandler(webapp2.RequestHandler):
         template_vars = {
             'city': city,
             'activities': activities,
+            'logout_url': logout_url,
         }
         self.response.write(template.render(template_vars))
     def post(self):
         city= self.request.get('city')
         activity = self.request.get_all('activity')
+        logout_url = users.create_logout_url('/')
 
 
 class BrowseHandler(webapp2.RequestHandler):
