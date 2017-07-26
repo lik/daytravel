@@ -47,6 +47,10 @@ a:hover {
 	border-width: 1px;
 }
 
+#login:hover {
+	background-color: rgba(0, 0, 0, 0);
+}
+
 form {
 	margin-left: 0;
 	margin-right: auto;
@@ -103,7 +107,7 @@ button:hover {
 	color: white;
 }
 
-.rightbutton:hover {
+.rightbutton:hover, {
 	border: #16A085;
 	border-width: 1px;
 	border-style: solid;
