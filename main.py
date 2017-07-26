@@ -275,9 +275,7 @@ class MainHandler(webapp2.RequestHandler):
 
 class PlanHandler(webapp2.RequestHandler):
     def get(self):
-        City_Query =City.query()
-        city = City_Query.fetch()
-
+        city= self.request.get('city')
         template = jinja_environment.get_template("templates/plan.html")
         template_vars = {
         'city': city,
