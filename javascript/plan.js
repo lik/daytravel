@@ -7,7 +7,3 @@ function showOptions(topic) {
          x.style.display = 'block';
      }
  }
-
-
-
-}
