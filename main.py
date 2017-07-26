@@ -6,15 +6,13 @@ import pprint
 import requests
 import sys
 import urllib
-
-from urllib2 import HTTPError
-from urllib import quote
-from urllib import urlencode
-
 import webapp2
 import os
 import jinja2
 
+from urllib2 import HTTPError
+from urllib import quote
+from urllib import urlencode
 from google.appengine.api import urlfetch
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -109,9 +107,11 @@ def request(host, path, bearer_token, url_params=None):
     result = urlfetch.fetch(
         url=url,
         params = urllib.urlencode({
-
-
-
+        '''
+            'term': term,
+            'location': location,
+            'limit': limit
+            '''
         }),
         method=urlfetch.GET,
         headers=headers)
