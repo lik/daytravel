@@ -235,17 +235,17 @@ class PlanHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
     def post(self):
         city= self.request.get('city')
-        activity = self.request.get('activity')
+        activities = self.request.get_all('activity')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         #this is where we pass in form input
         response = search(bearer_token, "hiking", "Los Altos, CA")
-        self.redirect('/results?city=' + city + '&activity=' + activity)
+        self.redirect('/results?city=' + city + '&activity=' + ','.join(activities))
 
 
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         city= self.request.get('city')
-        activity = self.request.get('activity')
+        activity = self.request.get_all('activity')
         template = jinja_environment.get_template("templates/results.html")
         template_vars = {
         'city': city,
@@ -254,7 +254,7 @@ class ResultsHandler(webapp2.RequestHandler):
         self.response.write(template.render(template_vars))
     def post(self):
         city= self.request.get('city')
-        activity = self.request.get('activity')
+        activity = self.request.get_all('activity')
 
 
 class BrowseHandler(webapp2.RequestHandler):
