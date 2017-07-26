@@ -6,6 +6,7 @@ import pprint
 import requests
 import sys
 import urllib
+import logging
 
 from urllib2 import HTTPError
 from urllib import quote
@@ -50,7 +51,7 @@ def obtain_bearer_token(host, path):
     Args:
         host (str): The domain host of the API.
         path (str): The path of the API after the domain.
-        url_params (dict): An optional set of query parameters in the request.
+        params (dict): An optional set of query parameters in the request.
 
     Returns:
         str: OAuth bearer token, obtained using client_id and client_secret.
@@ -82,14 +83,14 @@ def obtain_bearer_token(host, path):
     #return bearer_token
 
 
-def request(host, path, bearer_token, url_params=None):
+def request(host, path, bearer_token, params):
     """Given a bearer token, send a GET request to the API.
 
     Args:
         host (str): The domain host of the API.
         path (str): The path of the API after the domain.
         bearer_token (str): OAuth bearer token, obtained using client_id and client_secret.
-        url_params (dict): An optional set of query parameters in the request.
+        params (dict): An optional set of query parameters in the request.
 
     Returns:
         dict: The JSON response from the request.
@@ -97,8 +98,10 @@ def request(host, path, bearer_token, url_params=None):
     Raises:
         HTTPError: An error occurs from the HTTP request.
     """
-    url_params = url_params or {}
-    url = '{0}{1}'.format(host, quote(path.encode('utf8')))
+    url = '{0}{1}?{2}'.format(
+      host,
+      quote(path.encode('utf8')),
+      urllib.urlencode(params))
     headers = {
         'Authorization': 'Bearer %s' % bearer_token,
     }
@@ -106,16 +109,11 @@ def request(host, path, bearer_token, url_params=None):
     logging.info(u'Querying {0} ...'.format(url))
     result = urlfetch.fetch(
         url=url,
-        params = urllib.urlencode({
-
-
-
-        }),
         method=urlfetch.GET,
         headers=headers)
     logging.info('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@' + result.content)
     return json.loads(result.content)
-    #response = requests.request('GET', url, headers=headers, params=url_params)
+    #response = requests.request('GET', url, headers=headers, params=params)
     #return response.json()
 
 
@@ -130,12 +128,12 @@ def search(bearer_token, term, location):
         dict: The JSON response from the request.
     """
 
-    url_params = {
-        'term': term.replace(' ', '+'),
-        'location': location.replace(' ', '+'),
+    params = {
+        'term': term,
+        'location': location,
         'limit': SEARCH_LIMIT
     }
-    return request(API_HOST, SEARCH_PATH, bearer_token, url_params=url_params)
+    return request(API_HOST, SEARCH_PATH, bearer_token, params=params)
 
 
 def get_business(bearer_token, business_id):
@@ -269,7 +267,7 @@ class PlanHandler(webapp2.RequestHandler):
     def post(self):
         activity = self.request.get('subActivity')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
-        response = search(bearer_token, term, location)
+        response = search(bearer_token, "hiking", "Los Altos, CA")
 
 
 
