@@ -50,6 +50,17 @@ a:hover {
 	background-color: rgba(0, 0, 0, 0);
 }
 
+#toplink {
+	color: #FFFFFF;
+	background: none;
+	border: none;
+}
+
+#toplink:hover {
+	background-color: black;
+}
+
+
 form {
 	margin-left: 0;
 	margin-right: auto;
