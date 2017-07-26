@@ -215,6 +215,9 @@ def main_fusion():
 class Profile(ndb.Model):
     name = ndb.StringProperty()
 
+profile = Profile(name="Adina Wallis")
+key = profile.put()
+
 
 class City(ndb.Model):
     name = ndb.StringProperty()
