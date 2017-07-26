@@ -249,12 +249,15 @@ class PlanHandler(webapp2.RequestHandler):
 class ResultsHandler(webapp2.RequestHandler):
     def get(self):
         city= self.request.get('city')
-        activities = self.request.get_all('activity')
+        activities = self.request.get('activity')
         logout_url = users.create_logout_url('/')
-        activities_str = ','.join(activities)
-        activities_dict = dict((k.strip(), v.strip()) for k,v in
-              (item.split('.') for item in activities_str.split(',')))
-        print(activities_dict)
+        activity_list = activities.split(',')
+
+        categories = ['Food', 'Outdoor Activities', 'Beauty', 'Shopping', 'Sightseeing', 'Family Activities']
+        activity_dict = {}
+        for item in categories:
+            activity_dict[item]=[activity for activity in activity_list if item in activity]
+        print(activity_dict)
 
         template = jinja_environment.get_template("templates/results.html")
         template_vars = {
