@@ -32,7 +32,7 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 			<br>
 			<form method="post" action="" >
 				<select>
-					<option name="city" value="Select a City" selected>Select a City</option>
+
 					<option name="city" value="San Francisco">San Francisco, CA</option>
 					<option name="city" value="Mountain View">Mountain View, CA</option>
 					<option name="city" value="San Jose">San Jose, CA</option>
@@ -49,7 +49,10 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 	    <input id="pac-input" type="text" placeholder ="Enter a location"> -->
 	    <br>
 	    <br>
-	    <button class="rightbutton" href="/plan">Next</button>
+      <!-- In the onclick handler:
+      1. Get the city that was selected above.
+      2. set the window.location to /plan?city= + the city that was selected  -->
+	    <button class="rightbutton" onclick="">Next</button>
 			</form>
 			<br>
 			<br>
@@ -66,7 +69,7 @@ $('html').css({'background-image': 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 
 		</div>
 
 		{% endif %}
-		
+
 
 		{% endblock %}
 
