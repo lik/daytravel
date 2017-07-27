@@ -266,7 +266,7 @@ class ResultsHandler(webapp2.RequestHandler):
                 activity_dict[key].append(value)
             else:
                 activity_dict[key] = [value]
-
+                
             print('!!!!!!!!!!!!!!!')
             print(split_list)
         print(activity_dict)
