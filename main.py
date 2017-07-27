@@ -254,24 +254,39 @@ class ResultsHandler(webapp2.RequestHandler):
         logout_url = users.create_logout_url('/')
         activity_list = activities.split(',')
 
-        categories = ['Food', 'Outdoor Activities', 'Beauty', 'Shopping', 'Sightseeing', 'Family Activities']
         activity_dict = {}
-        for item in categories:
-            activity_dict[item]=[activity for activity in activity_list if item in activity]
+        split_list = []
+        print(activity_list)
+        for activity in activity_list:
+            #split on '.', save into a new list
+            split_list = activity.split('.')
+            key = split_list[0]
+            value = split_list[1]
+            if key in activity_dict:
+                activity_dict[key].append(value)
+            else:
+                activity_dict[key] = [value]
 
-        # Food
-        food_list = [item.replace('Food.', '') for item in activity_dict['Food']]
+            print('!!!!!!!!!!!!!!!')
+            print(split_list)
+        print(activity_dict)
+
+
+        # for item in categories:
+        #     activity_dict[item]=[activity for activity in activity_list if item in activity]
+
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
 
         ## this is what we need to finish!!!!
-        for activity in food_list:
+        for activity in split_list:
             response = search(bearer_token, activity, city)
-            print(response)
+        #    print(response)
 
         list_of_businesses = response['businesses']
         dict1 = list_of_businesses[0]
         business_name = dict1['name']
         link = dict1['url']
+        print(link)
 
 
         template = jinja_environment.get_template("templates/results.html")
