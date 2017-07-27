@@ -241,8 +241,9 @@ class PlanHandler(webapp2.RequestHandler):
         activities = self.request.get_all('activity')
         logout_url = users.create_logout_url('/')
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
-        #this is where we pass in form input
-        response = search(bearer_token, activities[0], city)
+
+        # this is where we pass in form input
+        response = search(bearer_token, 'hiking', city)
         self.redirect('/results?city=' + city + '&activity=' + ','.join(activities))
 
 
@@ -258,6 +259,14 @@ class ResultsHandler(webapp2.RequestHandler):
         for item in categories:
             activity_dict[item]=[activity for activity in activity_list if item in activity]
         print(activity_dict)
+
+        # Food
+        food_list = activities_dict.get('Food')
+
+        ## this is what we need to finish!!!!
+        # for activity in food_list:
+
+
 
         template = jinja_environment.get_template("templates/results.html")
         template_vars = {
