@@ -266,7 +266,7 @@ class ResultsHandler(webapp2.RequestHandler):
                 activity_dict[key].append(value)
             else:
                 activity_dict[key] = [value]
-                
+
             print('!!!!!!!!!!!!!!!')
             print(split_list)
         print(activity_dict)
@@ -294,14 +294,13 @@ class ResultsHandler(webapp2.RequestHandler):
             'city': city,
             'activities': activities,
             'logout_url': logout_url,
-            'business_name': business_name,
-            'link': link
+            'activity_dict': activity_dict
         }
         self.response.write(template.render(template_vars))
     def post(self):
         city= self.request.get('city')
         activity = self.request.get_all('activity')
-        business_name = self.request.get('business_name')
+        activity_dict = self.request.get('activity_dict')
         link = self.request.get('link')
         logout_url = users.create_logout_url('/')
 
