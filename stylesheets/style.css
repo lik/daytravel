@@ -35,6 +35,13 @@ a {
 	border-width: 1px;
 }
 
+#foodlink {
+	background-color: rgba(255, 255, 255, 0);
+	border-color: rgba(0, 0, 0, 0.0);
+	padding: 2px;
+	text-decoration: underline;
+}
+
 a:link, a:visited {
 	color: white;
 }
@@ -44,6 +51,13 @@ a:hover {
 	border: #e09192;
 	border-style: solid;
 	border-width: 1px;
+}
+
+#foodlink:hover {
+	color: #FF00FF;
+	background: none;
+	border: 100x;
+	border-style: solid;
 }
 
 #login:hover {
@@ -59,6 +73,8 @@ a:hover {
 #toplink:hover {
 	background-color: black;
 }
+
+
 
 
 form {
