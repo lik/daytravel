@@ -253,6 +253,7 @@ class ResultsHandler(webapp2.RequestHandler):
         activities = self.request.get('activity')
         logout_url = users.create_logout_url('/')
         activity_list = activities.split(',')
+        
         activity_dict = {}
         split_list = []
         for activity in activity_list:
@@ -268,7 +269,7 @@ class ResultsHandler(webapp2.RequestHandler):
 
         results_list = []
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
-        
+
         for category in activity_dict:
             category_dict = {
                 'name': category
@@ -290,22 +291,13 @@ class ResultsHandler(webapp2.RequestHandler):
             results_list.append(category_dict)
         print(results_list)
 
-        for activity in split_list:
-            response = search(bearer_token, activity, city)
-            # print(response)
-
-        list_of_businesses = response['businesses']
-        dict1 = list_of_businesses[0]
-        business_name = dict1['name']
-        link = dict1['url']
-
-
         template = jinja_environment.get_template("templates/results.html")
         template_vars = {
             'city': city,
             'activities': activities,
             'logout_url': logout_url,
-            'activity_dict': activity_dict
+            'activity_dict': activity_dict,
+            'results_list': results_list
         }
         self.response.write(template.render(template_vars))
     def post(self):
@@ -313,6 +305,7 @@ class ResultsHandler(webapp2.RequestHandler):
         activity = self.request.get_all('activity')
         activity_dict = self.request.get('activity_dict')
         link = self.request.get('link')
+        results_list = self.request.get('results_list')
         logout_url = users.create_logout_url('/')
 
 
