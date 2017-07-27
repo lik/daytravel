@@ -253,7 +253,7 @@ class ResultsHandler(webapp2.RequestHandler):
         activities = self.request.get('activity')
         logout_url = users.create_logout_url('/')
         activity_list = activities.split(',')
-        
+
         activity_dict = {}
         split_list = []
         for activity in activity_list:
@@ -300,13 +300,6 @@ class ResultsHandler(webapp2.RequestHandler):
             'results_list': results_list
         }
         self.response.write(template.render(template_vars))
-    def post(self):
-        city= self.request.get('city')
-        activity = self.request.get_all('activity')
-        activity_dict = self.request.get('activity_dict')
-        link = self.request.get('link')
-        results_list = self.request.get('results_list')
-        logout_url = users.create_logout_url('/')
 
 
 class BrowseHandler(webapp2.RequestHandler):
