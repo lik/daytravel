@@ -261,11 +261,13 @@ class ResultsHandler(webapp2.RequestHandler):
         print(activity_dict)
 
         # Food
-        food_list = activities_dict.get('Food')
+        food_list = [item.replace('Food.', '') for item in activity_dict['Food']]
 
+        bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
         ## this is what we need to finish!!!!
-        # for activity in food_list:
-
+        for activity in food_list:
+            response = search(bearer_token, activity, city)
+            print(response)
 
 
         template = jinja_environment.get_template("templates/results.html")
