@@ -4,17 +4,21 @@
 <body>
 	<div class="page">
 		<h3>Your Day in {{ city }}</h3>
+
+    {% for key in activity_dict %}
+      {{ key }}
+      values = activity_dict[key]
+      for str in values:
+        {{ str }}
+        
+
+    {% endfor %}
 		<br>
 		<hr>
 		<br>
 		Outdoor Activities:
 		<br>
 		Food: <a id="foodlink" target="_blank" href={{link}}>{{ business_name }}</a>
-    <!-- iterate through dictionary in here to get what we want for each category -->
-    {% for %}
-
-
-    {% endfor %}
 		<br>
 		Beauty:
 		<br>

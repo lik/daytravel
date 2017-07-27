@@ -271,22 +271,16 @@ class ResultsHandler(webapp2.RequestHandler):
             print(split_list)
         print(activity_dict)
 
-
-        # for item in categories:
-        #     activity_dict[item]=[activity for activity in activity_list if item in activity]
-
         bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
 
-        ## this is what we need to finish!!!!
         for activity in split_list:
             response = search(bearer_token, activity, city)
-        #    print(response)
+            print(response)
 
         list_of_businesses = response['businesses']
         dict1 = list_of_businesses[0]
         business_name = dict1['name']
         link = dict1['url']
-        print(link)
 
 
         template = jinja_environment.get_template("templates/results.html")
