@@ -271,7 +271,7 @@ class ResultsHandler(webapp2.RequestHandler):
         list_of_businesses = response['businesses']
         dict1 = list_of_businesses[0]
         business_name = dict1['name']
-        print(business_name)
+        link = dict1['url']
 
 
         template = jinja_environment.get_template("templates/results.html")
@@ -279,13 +279,15 @@ class ResultsHandler(webapp2.RequestHandler):
             'city': city,
             'activities': activities,
             'logout_url': logout_url,
-            'business_name': business_name
+            'business_name': business_name,
+            'link': link
         }
         self.response.write(template.render(template_vars))
     def post(self):
         city= self.request.get('city')
         activity = self.request.get_all('activity')
         business_name = self.request.get('business_name')
+        link = self.request.get('link')
         logout_url = users.create_logout_url('/')
 
 
