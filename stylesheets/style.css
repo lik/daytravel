@@ -72,20 +72,17 @@ input {
 	border-style: solid;
 }
 
-
 select {
 	background-color: #fff;
-	border: white;
-	border-width: 1px;
-	border-style: solid;
-	border-radius: 0px;
-	padding: 7px 16px;
-	display: inline-block;
+	color: #000000;
 	font-size: 14px;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
-
+	padding: 7px 16px; /* Firefox */
+	height: 40px;  /* Chrome & Safari height */
+	-webkit-border-radius: 0;
+	border: 0;
+	outline: 1px inset #fff;
+	outline-offset: -1px;
+	text-align: center;
 }
 
 button {
