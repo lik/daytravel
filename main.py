@@ -261,7 +261,7 @@ class ResultsHandler(webapp2.RequestHandler):
         print(activity_dict)
 
         # Food
-        food_list = activities_dict.get('Food')
+        food_list = activity_dict.get('Food')
 
         ## this is what we need to finish!!!!
         # for activity in food_list:
