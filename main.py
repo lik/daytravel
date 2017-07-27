@@ -42,7 +42,7 @@ GRANT_TYPE = 'client_credentials'
 # Defaults for our simple example.
 DEFAULT_TERM = 'dinner'
 DEFAULT_LOCATION = 'San Francisco, CA'
-SEARCH_LIMIT = 3
+SEARCH_LIMIT = 1
 
 
 def obtain_bearer_token(host, path):
@@ -258,14 +258,20 @@ class ResultsHandler(webapp2.RequestHandler):
         activity_dict = {}
         for item in categories:
             activity_dict[item]=[activity for activity in activity_list if item in activity]
-        print(activity_dict)
 
         # Food
-        food_list = activity_dict.get('Food')
+        food_list = [item.replace('Food.', '') for item in activity_dict['Food']]
+        bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
 
         ## this is what we need to finish!!!!
-        # for activity in food_list:
+        for activity in food_list:
+            response = search(bearer_token, activity, city)
+            print(response)
 
+        list_of_businesses = response['businesses']
+        dict1 = list_of_businesses[0]
+        business_name = dict1['name']
+        link = dict1['url']
 
 
         template = jinja_environment.get_template("templates/results.html")
@@ -273,11 +279,15 @@ class ResultsHandler(webapp2.RequestHandler):
             'city': city,
             'activities': activities,
             'logout_url': logout_url,
+            'business_name': business_name,
+            'link': link
         }
         self.response.write(template.render(template_vars))
     def post(self):
         city= self.request.get('city')
         activity = self.request.get_all('activity')
+        business_name = self.request.get('business_name')
+        link = self.request.get('link')
         logout_url = users.create_logout_url('/')
 
 
