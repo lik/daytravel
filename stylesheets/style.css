@@ -16,6 +16,12 @@ html {
 	padding: 10px;
 }
 
+#pac-input {
+	color: black;
+	padding: 7px 16px;
+	font-size: 14px;
+}
+
 .page {
 	color: #FFFFFF;
 }
