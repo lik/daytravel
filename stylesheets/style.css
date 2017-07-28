@@ -5,7 +5,7 @@
 
 html {
 	height: 100%;
-	background-repeat: no-repeat;
+	background-repeat: repeat;
 	background-size: cover;
 	font-family: 'Open Sans', sans-serif;
 	color: #FFFFFF;
@@ -39,7 +39,7 @@ a {
 	background-color: rgba(255, 255, 255, 0);
 	border-color: rgba(0, 0, 0, 0.0);
 	padding: 2px;
-	text-decoration: underline;
+	font-style: italic;
 }
 
 a:link, a:visited {
@@ -54,9 +54,8 @@ a:hover {
 }
 
 #foodlink:hover {
-	color: #FF00FF;
+	color: #6495ED;
 	background: none;
-	border: 100x;
 	border-style: solid;
 }
 
