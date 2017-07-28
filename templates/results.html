@@ -8,22 +8,14 @@
 		<hr>
 		<br>
     {% for item in results_list %}
-      {{ item }}
-      {{ item.name }}<br><br>
-    {% endfor %}<br>
-    {% for item in results_list.subcategories %}
+      {{ item.name }}
+      <br>
+      {% for x in item.subcategories %}
+        {{x.name}}: <a href={{x.link}}>{{ x.business_name }}</a><br><br>
+      {% endfor %} <br>
     {% endfor %}
-		Outdoor Activities:
 		<br>
-		Food: <a id="foodlink" target="_blank" href={{link}}>{{ business_name }}</a>
-		<br>
-		Beauty:
-		<br>
-		Shopping:
-		<br>
-		Sightseeing:
-		<br>
-		Family Activities:
+		<!-- Food: <a id="foodlink" target="_blank" href={{link}}>{{ business_name }}</a> -->
 		<br>
 		<br>
 		<br>
