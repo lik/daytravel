@@ -10,9 +10,11 @@
     {% for item in results_list %}
       {{ item.name }}
       <br>
+      <div id="testing">
       {% for x in item.subcategories %}
-        {{x.name}}: <a href={{x.link}}>{{ x.business_name }}</a><br><br>
-      {% endfor %} <br>
+        {{x.name}}: <a id="foodlink" target="_blank"  href={{x.link}}>{{ x.business_name }}</a><br><br>
+      {% endfor %}
+      </div>
     {% endfor %}
 		<br>
 		<!-- Food: <a id="foodlink" target="_blank" href={{link}}>{{ business_name }}</a> -->

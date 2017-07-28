@@ -133,9 +133,14 @@ input {
 	margin-right: 5px;
 }
 
-#foodDiv, #outdoorDiv, #beautyDiv, #shoppingDiv, #sightseeingDiv, #familyDiv {
+#foodDiv, #outdoorDiv, #beautyDiv, #shoppingDiv, #sightseeingDiv, #familyDiv, #testing {
 	margin-left: 18px;
 }
+
+#testing {
+	font-size: 14px;
+}
+
 
 @media only screen and (max-width: 960px) {
 	.page {
