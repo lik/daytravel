@@ -22,6 +22,7 @@ html {
 	font-size: 14px;
 }
 
+
 .page {
 	color: #FFFFFF;
 }
@@ -134,6 +135,20 @@ button:hover {
 	color: white;
 }
 
+.nextbutton {
+	background: #16A085;
+	border: #16A085;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.nextbutton:hover {
+	border: #16A085; 	
+	border-style: solid;
+	border-width: 1px;
+}
+
+
 input {
 	margin-right: 5px;
 }
@@ -160,3 +175,4 @@ input {
 		margin: 0 auto;
 	}
 }
+
