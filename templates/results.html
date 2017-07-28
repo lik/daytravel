@@ -4,29 +4,20 @@
 <body>
 	<div class="page">
 		<h3>Your Day in {{ city }}</h3>
-
-    {% for key in activity_dict %}
-      {{ key }}
-      values = activity_dict[key]
-      for str in values:
-        {{ str }}
-        
-
-    {% endfor %}
 		<br>
 		<hr>
 		<br>
-		Outdoor Activities:
+    {% for item in results_list %}
+      {{ item.name }}
+      <br>
+      <div id="testing">
+      {% for x in item.subcategories %}
+        {{x.name}}: <a id="foodlink" target="_blank"  href={{x.link}}>{{ x.business_name }}</a><br><br>
+      {% endfor %}
+      </div>
+    {% endfor %}
 		<br>
-		Food: <a id="foodlink" target="_blank" href={{link}}>{{ business_name }}</a>
-		<br>
-		Beauty:
-		<br>
-		Shopping:
-		<br>
-		Sightseeing:
-		<br>
-		Family Activities:
+		<!-- Food: <a id="foodlink" target="_blank" href={{link}}>{{ business_name }}</a> -->
 		<br>
 		<br>
 		<br>
